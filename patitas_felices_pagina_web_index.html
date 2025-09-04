@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patitas Felices – Clínica & Spa para Mascotas</title>
+  <meta name="description" content="Clínica veterinaria y spa para mascotas. Cuidamos su salud y su felicidad. Reserva servicios, conoce nuestro spa y contáctanos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fffaf7;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary:#f59e0b; /* ámbar */
+      --primary-600:#d97706;
+      --accent:#38bdf8; /* cielo */
+      --success:#10b981;
+      --shadow:0 10px 30px rgba(17,24,39,.08);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+    /* Layout */
+    .container{width:min(1120px,92%);margin-inline:auto}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid rgba(0,0,0,.05)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;box-shadow:var(--shadow)}
+    nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+    nav a{font-weight:500}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:var(--text);color:#fff;font-weight:600;box-shadow:var(--shadow);border:0;cursor:pointer}
+    .btn.primary{background:var(--primary);}
+    .btn.primary:hover{background:var(--primary-600)}
+
+    /* Mobile Menu */
+    .menu-toggle{display:none}
+    @media (max-width:860px){
+      nav ul{display:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,0,0,.08);padding:10px 14px;border-radius:999px;background:#fff}
+      .mobile-menu{position:fixed;inset:0 0 auto 0;top:64px;background:#ffffff;border-top:1px solid rgba(0,0,0,.05);padding:18px;display:none}
+      .mobile-menu.open{display:block}
+      .mobile-menu a{display:block;padding:12px 2px;border-bottom:1px dashed rgba(0,0,0,.06)}
+    }
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:-20%;background:radial-gradient(60% 60% at 20% 10%, rgba(245,158,11,.25),transparent 60%), radial-gradient(60% 60% at 90% 20%, rgba(56,189,248,.25),transparent 60%), radial-gradient(70% 70% at 50% 100%, rgba(16,185,129,.18),transparent 60%);filter:blur(40px);animation:float 18s linear infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+    .hero-inner{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:40px 0}
+    .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 10px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+    .badge{padding:8px 12px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);font-size:14px}
+    .hero-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;display:grid;gap:12px}
+    .hero-card .thumb{aspect-ratio:1.5/1;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#fde68a,#a7f3d0)}
+
+    /* Sections */
+    section{padding:56px 0}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    .section-title h2{font-size:clamp(24px,4vw,34px);margin:0}
+    .muted{color:var(--muted)}
+
+    /* Servicios */
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr}
+      .grid.cols-3,.grid.cols-4{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:620px){
+      .grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
+    }
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .card h3{margin:10px 0 6px}
+    .pill{font-size:12px;padding:6px 10px;border:1px solid rgba(0,0,0,.08);border-radius:999px;display:inline-block;background:#fff}
+
+    /* Galería */
+    .gallery{grid-auto-rows:220px}
+    .gallery .item{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:#eee;background-position:center;background-size:cover}
+
+    /* Testimonios */
+    .testimonial{display:flex;gap:14px;align-items:flex-start}
+    .avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#fde68a,#93c5fd)}
+    .stars{font-size:18px;color:#f59e0b}
+    .slider{position:relative}
+    .slider-track{display:flex;gap:18px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+    .slide{flex:0 0 320px;scroll-snap-align:start}
+
+    /* CTA WhatsApp */
+    .cta{background:linear-gradient(135deg,#fff,#fff7ed);border:1px solid rgba(0,0,0,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;display:grid;gap:10px;align-items:center}
+
+    /* Contacto */
+    form{display:grid;gap:12px}
+    input,textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);background:#fff;outline:none}
+    textarea{min-height:120px;resize:vertical}
+    .helper{font-size:12px;color:var(--muted)}
+
+    /* Footer */
+    footer{padding:32px 0;border-top:1px solid rgba(0,0,0,.06);color:var(--muted)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .socials{display:flex;gap:12px}
+    .icon{width:22px;height:22px}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand" aria-label="Patitas Felices, ir al inicio">
+        <span class="logo">🐾</span>
+        <span>Patitas Felices</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#spa">Spa</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn primary" href="#contacto">Reservar</a>
+        <button class="menu-toggle" aria-label="Abrir menú" id="btnMenu">☰ Menú</button>
+      </div>
+    </div>
+    <div class="mobile-menu container" id="mobileMenu">
+      <a href="#servicios">Servicios</a>
+      <a href="#spa">Spa</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="badges">
+          <span class="badge">Clínica & Spa</span>
+          <span class="badge">Amor + Ciencia</span>
+          <span class="badge">Citas por WhatsApp</span>
+        </div>
+        <h1>Donde cada huella cuenta 🐶🐱</h1>
+        <p>En Patitas Felices cuidamos la salud y la felicidad de tus mascotas con un equipo profesional, instalaciones cómodas y mucho cariño.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="#servicios" class="btn">Ver servicios</a>
+          <a href="#contacto" class="btn primary">Reserva ahora</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Tarjeta destacada de servicios">
+        <div class="thumb" role="img" aria-label="Perro y gato felices (reemplaza con tu imagen)"></div>
+        <div class="muted">Próxima disponibilidad</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="pill">Consulta general</span>
+          <span class="pill">Vacunación</span>
+          <span class="pill">Baño & corte</span>
+          <span class="pill">Spa relajante</span>
+        </div>
+        <a href="#contacto" class="btn primary">Agendar cita</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nuestros servicios</h2>
+        <p class="muted">Salud, bienestar y mimos para tu mejor amigo.</p>
+      </div>
+      <div class="grid cols-4">
+        <article class="card">
+          <h3>Clínica veterinaria</h3>
+          <p class="muted">Consultas, desparasitación, diagnósticos y control preventivo.</p>
+          <div class="pill">Desde Q<span>150</span></div>
+        </article>
+        <article class="card">
+          <h3>Vacunación</h3>
+          <p class="muted">Esquemas completos y recordatorios personalizados.</p>
+          <div class="pill">Paquetes disponibles</div>
+        </article>
+        <article class="card">
+          <h3>Baño & corte</h3>
+          <p class="muted">Baños medicados, grooming estético y cortes a medida.</p>
+          <div class="pill">Higiene + estilo</div>
+        </article>
+        <article class="card">
+          <h3>Spa relajante</h3>
+          <p class="muted">Masajes suaves, aromaterapia y cuidado antiestrés.</p>
+          <div class="pill">Favorito de la casa</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spa destacado -->
+  <section id="spa">
+    <div class="container">
+      <div class="section-title">
+        <h2>Experiencia Spa</h2>
+        <p class="muted">Un espacio pensado para consentir sin estrés.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="card">
+          <h3>Relajación total</h3>
+          <p class="muted">Rutinas con tiempos de adaptación y música suave.</p>
+        </article>
+        <article class="card">
+          <h3>Productos seguros</h3>
+          <p class="muted">Solo cosmética pet-friendly y aprobada por veterinarios.</p>
+        </article>
+        <article class="card">
+          <h3>Reporte post-servicio</h3>
+          <p class="muted">Te contamos cómo se sintió y qué recomendamos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-title">
+        <h2>Galería</h2>
+        <p class="muted">Momentos felices de nuestros peludos.</p>
+      </div>
+      <div class="grid gallery cols-3">
+        <div class="item" style="background-image:url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1200&auto=format&fit=crop');" aria-label="Perrito feliz"></div>
+        <div class="item" style="background-image:url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop');" aria-label="Perro en spa"></div>
+        <div class="item" style="background-image:url('https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=1200&auto=format&fit=crop');" aria-label="Gato relajado"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Lo que dicen nuestras familias</h2>
+        <p class="muted">Tu confianza es nuestra mejor recompensa.</p>
+      </div>
+      <div class="slider">
+        <div class="slider-track" id="slider">
+          <article class="card slide testimonial">
+            <div class="avatar"></div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Trataron a Kira con tanta paciencia que ya no teme al baño. ¡Gracias!”</p>
+              <div class="muted">— Andrea M.</div>
+            </div>
+          </article>
+          <article class="card slide testimonial">
+            <div class="avatar"></div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“La consulta fue completa y clara. Se nota el amor por los animales.”</p>
+              <div class="muted">— Luis R.</div>
+            </div>
+          </article>
+          <article class="card slide testimonial">
+            <div class="avatar"></div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“El spa dejó a mi gatita súper relajada y con olor riquísimo.”</p>
+              <div class="muted">— Sofía P.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA WhatsApp -->
+  <section>
+    <div class="container">
+      <div class="cta">
+        <h3>¿Listo para consentirlos?</h3>
+        <p class="muted">Escríbenos por WhatsApp para cotizar y agendar tu servicio.</p>
+        <a class="btn primary" href="https://wa.me/50200000000?text=Hola%20Patitas%20Felices,%20quiero%20una%20cita" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+        <span class="helper">Reemplaza el número por el tuyo.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contáctanos</h2>
+        <p class="muted">Te respondemos lo antes posible.</p>
+      </div>
+      <form id="contactForm" novalidate>
+        <div class="grid cols-3">
+          <div class="card">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="card">
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" placeholder="tucorreo@mail.com" required />
+          </div>
+          <div class="card">
+            <label for="phone">Teléfono (opcional)</label>
+            <input id="phone" name="phone" type="tel" placeholder="+502 …" />
+          </div>
+        </div>
+        <div class="card">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" placeholder="Cuéntanos qué necesitas" required></textarea>
+          <span class="helper">Al enviar aceptas nuestro aviso de privacidad.</span>
+        </div>
+        <button class="btn primary" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container foot">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="logo">🐾</span>
+        <div>
+          <strong>Patitas Felices</strong>
+          <div class="muted">Clínica & Spa para Mascotas</div>
+        </div>
+      </div>
+      <div class="socials">
+        <a href="#" aria-label="Facebook" title="Facebook">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.2l-.3 3h-1.9v7A10 10 0 0 0 22 12"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-5 3.8A5.2 5.2 0 1 1 6.8 13 5.2 5.2 0 0 1 12 7.8m0 2A3.2 3.2 0 1 0 15.2 13 3.2 3.2 0 0 0 12 9.8m5.8-3.4a1 1 0 1 1-1 1 1 1 0 0 1 1-1"/></svg>
+        </a>
+        <a href="#" aria-label="WhatsApp" title="WhatsApp">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3.7A10 10 0 0 0 4.3 19.3L3 23l3.8-1.3A10 10 0 1 0 20 3.7M12 20a8 8 0 0 1-4.3-1.3l-.3-.2-2.5.9.8-2.4-.2-.3A8 8 0 1 1 12 20m4.5-5.7c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.6.1-.7.8-.8 1-.3.1-.5 0a6.5 6.5 0 0 1-2-1.2 7.3 7.3 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.3-.4.1-.2a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3 2.3 2.3 0 0 0-.7 1.7 3.9 3.9 0 0 0 .8 2.1 9 9 0 0 0 3.5 3.3 11.5 11.5 0 0 0 2 .9 4.8 4.8 0 0 0 2.2.1 2 2 0 0 0 1.3-1 1.7 1.7 0 0 0 .1-1 .9.9 0 0 0-.5-.6Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+        }
+      })
+    })
+
+    // Menú móvil
+    const btnMenu=document.getElementById('btnMenu');
+    const mobileMenu=document.getElementById('mobileMenu');
+    btnMenu?.addEventListener('click',()=>mobileMenu.classList.toggle('open'))
+
+    // Validación simple del formulario
+    const form=document.getElementById('contactForm');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data=new FormData(form);
+      const name=data.get('name').trim();
+      const email=data.get('email').trim();
+      const message=data.get('message').trim();
+      if(!name||!email||!message){
+        alert('Por favor completa nombre, correo y mensaje.');
+        return;
+      }
+      // Aquí podrías integrar EmailJS, Formspree o tu backend.
+      alert('¡Gracias! Hemos recibido tu mensaje.');
+      form.reset();
+    })
+
+    // Auto deslizamiento simple de testimonios (opcional)
+    const slider=document.getElementById('slider');
+    let autoScroll=0;
+    setInterval(()=>{
+      if(!slider) return;
+      autoScroll = (autoScroll + 320) % (slider.scrollWidth - slider.clientWidth + 320);
+      slider.scrollTo({left:autoScroll,behavior:'smooth'});
+    }, 4000);
+  </script>
+</body>
+</html>
